@@ -14,7 +14,11 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/",
+      "dest": "/public"
+    },
+    {
+      "src": "/api/(.*)",
       "dest": "/server.js"
     }
   ]
