@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express');
-const typeDefs = require('./typedefs');
-const resolvers = require('./resolvers');
+const typeDefs = require('./gql/typedefs');
+const resolvers = require('./gql/resolvers');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -26,8 +26,10 @@ const auth = ({ req }) => {
 
 const server = new ApolloServer({ typeDefs, resolvers, context: auth });
 
-const publicFolder = path.join(__dirname + '/../public');
+const publicFolder = path.join(__dirname + '/public');
+
 console.log(publicFolder);
+
 app.use(express.static(publicFolder));
 app.get('/*', (req, res) => {
 	res.sendFile(publicFolder);
